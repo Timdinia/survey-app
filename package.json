@@ -1,0 +1,23 @@
+{
+  "name": "usurvey",
+  "version": "1.0.0",
+  "description": "User feedback app built with the MERN stack",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Tim Dinia",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.3.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.4",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
