@@ -4,8 +4,8 @@
   "description": "User feedback app built with the MERN stack",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js",
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "Tim Dinia",
   "license": "ISC",
