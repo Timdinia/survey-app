@@ -1,11 +1,9 @@
-// Dev.js - dont commit this
+// Keys.js - figure out what set of credentials to return
+if (process.env.NODE_ENV === 'production') {
+    // production - return the prod set of keys
+    module.exports = require('./prod');
+} else {
+    // development - return the dev set of keys
+    module.exports = require('./dev');
+}
 
-module.exports = {
-    GOOGLE_CLIENT_ID:
-        '471833301646-f18ibjj208q8i5hc3ug0u4pd8mq4fh6k.apps.googleusercontent.com',
-    GOOGLE_CLIENT_SECRET: 'I9C8ZJhLVyofWxdqD6rRSrFU',
-    GOOGLE_CALLBACK_URL: '/auth/google/callback',
-    mongoURI: 'mongodb+srv://tim:zk4KhGkdQEwWhd39@cluster0-lwxt9.mongodb.net/test?retryWrites=true',
-        //'mongodb+srv://tim:SWn4AnsP7ekIZPPJ@usurvey-dev-lwxt9.gcp.mongodb.net/test?retryWrites=true',
-    cookieKey: 'superSecretKey',
-};

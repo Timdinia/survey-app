@@ -34,5 +34,9 @@ mongoose
 // Call the auth routes with the app object
 require('./routes/authRoutes')(app);
 
+app.get('/', (req, res) => {
+    res.send('Home route');
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server starded and listening on ${PORT}`));

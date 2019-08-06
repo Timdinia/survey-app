@@ -4,8 +4,8 @@
   "description": "User feedback app built with the MERN stack",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "node index.js",
+    "start": "nodemon index.js"
   },
   "author": "Tim Dinia",
   "license": "ISC",
@@ -18,6 +18,6 @@
     "passport-google-oauth": "^2.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.11"
+    "nodemon": "^1.19.1"
   }
 }
