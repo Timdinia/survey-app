@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,8 +21,31 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function ButtonAppBar() {
+function ButtonAppBar(props) {
     const classes = useStyles();
+    console.log('props: ' + props);
+    console.log('props.auth: ' + props.auth);
+    function renderContent() {
+        switch (props.auth) {
+            case null:
+                // still deciding
+                return;
+            case false:
+                // logged out
+                return (
+                    <Button color="inherit" href="/auth/google">
+                        Se connecter
+                    </Button>
+                );
+            default:
+                // logged in
+                return (
+                    <Button color="inherit" href="/api/logout">
+                        Se déconnecter
+                    </Button>
+                );
+        }
+    }
 
     return (
         <div className={classes.root}>
@@ -37,16 +59,14 @@ function ButtonAppBar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link to="/">Usurvey</Link>
-                    </Typography>
-                    <MenuItem>
-                        <Link to="/dashbord">Dashbord</Link>
-                    </MenuItem>
-                    <MenuItem>
-                        <Link to="/surveys/new">New survey</Link>
-                    </MenuItem>
-                    <Button color="inherit">Login</Button>
+                    <Link
+                        variant="h6"
+                        className={classes.title}
+                        to={props.auth ? '/surveys' : '/'}
+                    >
+                        Usurvey
+                    </Link>
+                    {renderContent()}
                 </Toolbar>
             </AppBar>
         </div>

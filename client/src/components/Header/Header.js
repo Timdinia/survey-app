@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import AppBar from './Appbar/AppBar';
 
 class Header extends Component {
@@ -12,10 +11,4 @@ class Header extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        auth: state.auth,
-    };
-}
-
-export default connect(mapStateToProps)(Header);
+export default Header;
