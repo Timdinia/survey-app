@@ -10,15 +10,12 @@ require('./services/passport');
 // Initialise express server
 const app = express();
 
-// Load Models
-const User = require('./models/User');
-
 // App configuration
 app.use(
-    cookieSession({
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
-        keys: [cookieKey],
-    })
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
+    keys: [cookieKey],
+  })
 );
 
 // Tell Passport to use cookies to handle authentication
@@ -27,15 +24,15 @@ app.use(passport.session());
 
 //Connect to MongoDB database
 mongoose
-    .connect(db, { useNewUrlParser: true })
-    .then(() => console.log('Database connected'))
-    .catch(err => console.log('Not connected to Database', err));
+  .connect(db, { useNewUrlParser: true })
+  .then(() => console.log('Database connected'))
+  .catch(err => console.log('Not connected to Database', err));
 
 // Call the auth routes with the app object
-require('./routes/authRoutes')(app);
+require('./routes/auth')(app);
 
 app.get('/', (req, res) => {
-    res.send('Home route');
+  res.send('Test route');
 });
 
 const PORT = process.env.PORT || 8000;
