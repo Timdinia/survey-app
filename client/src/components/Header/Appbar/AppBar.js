@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import Payments from '../../Payments';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,9 +36,12 @@ const ButtonAppBar = ({ auth }) => {
         );
       default:
         return (
-          <Button color="inherit" href="/api/logout">
-            Se déconnecter
-          </Button>
+          <Fragment>
+            <Payments />
+            <Button color="inherit" href="/api/logout">
+              Se déconnecter
+            </Button>
+          </Fragment>
         );
     }
   }
@@ -49,7 +53,7 @@ const ButtonAppBar = ({ auth }) => {
           <Link
             variant="h2"
             className={classes.title}
-            to={auth ? '/surveys' : '/'}>
+            to={auth ? '/dashboard' : '/'}>
             Usurvey
           </Link>
           {renderContent()}

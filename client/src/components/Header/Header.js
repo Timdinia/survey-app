@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import AppBar from './Appbar/AppBar';
 
 class Header extends Component {
     render() {
         return (
-            <React.Fragment>
+            <Fragment>
                 <AppBar />
-            </React.Fragment>
+            </Fragment>
         );
     }
 }

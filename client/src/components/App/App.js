@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -6,29 +6,29 @@ import * as actions from '../../actions';
 import './App.scss';
 import Header from '../Header';
 import Landing from '../Landing';
-import Dashbord from '../Dashbord';
+import Dashboard from '../Dashboard';
 import SurveyNew from '../SurveyNew';
 
 class App extends Component {
-    componentDidMount() {
-        this.props.fetchUser();
-    }
+  componentDidMount() {
+    this.props.fetchUser();
+  }
 
-    render() {
-        return (
-            <React.Fragment>
-                <Router>
-                    <Header />
-                    <Route exact path="/" component={Landing} />
-                    <Route exact path="/dashbord" component={Dashbord} />
-                    <Route path="/surveys/new" component={SurveyNew} />
-                </Router>
-            </React.Fragment>
-        );
-    }
+  render() {
+    return (
+      <Fragment>
+        <Router>
+          <Header />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route path="/surveys/new" component={SurveyNew} />
+        </Router>
+      </Fragment>
+    );
+  }
 }
 
 export default connect(
-    null,
-    actions
+  null,
+  actions
 )(App);
