@@ -3,14 +3,15 @@ const express = require('express');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 const cookieKey = require('./config/keys').cookieKey;
 const db = require('./config/keys').mongoURI;
 require('./services/passport');
 
-// Initialise express server
+// Load express server
 const app = express();
 
-// App configuration
+app.use(bodyParser.json());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
@@ -18,19 +19,21 @@ app.use(
   })
 );
 
-// Tell Passport to use cookies to handle authentication
+// Set Passport to use cookies to handle authentication
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Connect to MongoDB database
+// Connect to MongoDB database
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log('Database connected'))
   .catch(err => console.log('Not connected to Database', err));
 
-// Call the auth routes with the app object
+// Load routes
 require('./routes/auth')(app);
+require('./routes/billing')(app);
 
+// Test route
 app.get('/', (req, res) => {
   res.send('Test route');
 });
