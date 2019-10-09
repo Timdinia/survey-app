@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Payments from '../../Payments';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,10 +19,13 @@ const useStyles = makeStyles(theme => ({
     textDecoration: 'none',
     fontSize: '24px',
     fontWeight: 'bold'
+  },
+  credits: {
+    marginRight: theme.spacing(3)
   }
 }));
 
-const ButtonAppBar = ({ auth }) => {
+const NavBar = ({ auth }) => {
   const classes = useStyles();
 
   function renderContent() {
@@ -35,8 +39,12 @@ const ButtonAppBar = ({ auth }) => {
           </Button>
         );
       default:
+        console.log(auth);
         return (
           <Fragment>
+            <Typography className={classes.credits}>
+              Crédits: {auth.credits}
+            </Typography>
             <Payments />
             <Button color="inherit" href="/api/logout">
               Se déconnecter
@@ -67,4 +75,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(ButtonAppBar);
+export default connect(mapStateToProps)(NavBar);

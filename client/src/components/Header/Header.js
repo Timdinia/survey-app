@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
-import AppBar from './Appbar/AppBar';
+import NavBar from './NavBar/NavBar';
 
 class Header extends Component {
-    render() {
-        return (
-            <Fragment>
-                <AppBar />
-            </Fragment>
-        );
-    }
+  render() {
+    return (
+      <Fragment>
+        <NavBar />
+      </Fragment>
+    );
+  }
 }
 
 export default Header;
