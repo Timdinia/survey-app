@@ -1,27 +1,28 @@
 {
-    "name": "usurvey",
-    "version": "1.0.0",
-    "description": "User feedback app built with the MERN stack",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js",
-        "client": "yarn --cwd ./client run start",
-        "server": "nodemon index.js",
-        "dev": "concurrently \"npm run server\" \"npm run client\""
-    },
-    "author": "Tim Dinia",
-    "license": "ISC",
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "concurrently": "^4.1.1",
-        "cookie-session": "^1.3.3",
-        "express": "^4.16.4",
-        "mongoose": "^5.5.4",
-        "passport": "^0.4.0",
-        "passport-google-oauth": "^2.0.0",
-        "stripe": "^7.10.0"
-    },
-    "devDependencies": {
-        "nodemon": "^1.19.1"
-    }
+  "name": "usurvey",
+  "version": "1.0.0",
+  "description": "User feedback app built with the MERN stack",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "client": "yarn --cwd ./client run start",
+    "server": "nodemon index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client "
+  },
+  "author": "Tim Dinia",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.1",
+    "cookie-session": "^1.3.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.4",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^2.0.0",
+    "stripe": "^7.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
 }
