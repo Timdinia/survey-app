@@ -6,6 +6,8 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const cookieKey = require('./config/keys').cookieKey;
 const db = require('./config/keys').mongoURI;
+require('./models/User');
+require('./models/Survey');
 require('./services/passport');
 
 // Load express server
@@ -33,18 +35,11 @@ mongoose
 require('./routes/auth')(app);
 require('./routes/billing')(app);
 
-// Production routing
+// Serve production assets
 if (process.env.NODE_ENV === 'production') {
-  /* 
-    Express will serve up production assets
-    Like main.js or main.css files
-  */
+  // Set static folder
   app.use(express.static('client/build'));
 
-  /*
-    If it doesn't recognize the route
-    Express will serve up the index.html file 
-  */
   const path = require('path');
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html '));
