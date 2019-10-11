@@ -34,6 +34,7 @@ mongoose
 // Load routes
 require('./routes/auth')(app);
 require('./routes/billing')(app);
+require('./routes/survey')(app);
 
 // Serve production assets
 if (process.env.NODE_ENV === 'production') {
@@ -52,4 +53,4 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`Server starded and listening on ${PORT}`));
+app.listen(PORT, () => console.log(`Server started and listening on ${PORT}`));
