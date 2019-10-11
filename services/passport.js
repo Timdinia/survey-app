@@ -8,15 +8,11 @@ const User = require('../models/User');
 
 // Serialize user
 passport.serializeUser((user, done) => {
-  console.log('serializing user');
-  console.log(user.id);
   done(null, user.id);
 });
 
 // Deserialize user
 passport.deserializeUser((id, done) => {
-  console.log('deserialize user');
-  console.log(id);
   User.findById(id, (err, user) => {
     if (err) {
       console.error(err);

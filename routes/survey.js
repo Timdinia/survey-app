@@ -6,7 +6,11 @@ const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 module.exports = app => {
-  app.post('/api/surveys', requireAuth, requireCredits, (req, res) => {
+  app.get('/api/surveys/thankyou', (req, res) => {
+    res.send('Merci pour votre avis !');
+  });
+
+  app.post('/api/surveys', requireAuth, requireCredits, async (req, res) => {
     const { title, subject, body, recipients } = req.body;
 
     const survey = new Survey({
@@ -20,6 +24,19 @@ module.exports = app => {
 
     // Send email
     const mailer = new Mailer(survey, surveyTemplate(survey));
-    mailer.send();
+
+    try {
+      await mailer.send();
+
+      await survey.save();
+
+      req.user.credits -= 1;
+
+      const user = await req.user.save();
+
+      res.status(200).send({ user });
+    } catch (err) {
+      console.error(err).send({ error: 'Internal server error' });
+    }
   });
 };
