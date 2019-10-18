@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import SurveysTable from './components/SurveysTable';
 
-export default class Surveys extends Component {
-  render() {
-    return (
-      <div>
-        <h2>Surveys</h2>
-      </div>
-    );
-  }
-}
+const Surveys = () => {
+  return (
+    <React.Fragment>
+      <h2>Sondages envoyés</h2>
+      <SurveysTable />
+    </React.Fragment>
+  );
+};
+
+export default Surveys;

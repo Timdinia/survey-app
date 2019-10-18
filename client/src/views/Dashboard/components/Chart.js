@@ -7,7 +7,7 @@ import {
   Label,
   ResponsiveContainer
 } from 'recharts';
-import Title from './Title';
+import Title from '../../../layout/Main/components/Title';
 
 // Generate Sales Data
 function createData(points, amount) {

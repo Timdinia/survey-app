@@ -27,6 +27,7 @@ const Routes = () => {
         component={SurveyNew}
         layout={MainLayout}
       />
+
       <PublicRoute
         component={NotFound}
         exact

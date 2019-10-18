@@ -4,22 +4,27 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Payments from '../../../components/Payments';
-import { Typography } from '@material-ui/core';
+import { Typography, Tooltip } from '@material-ui/core';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Badge from '@material-ui/core/Badge';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
-  title: {
-    flexGrow: 1,
-    marginLeft: theme.spacing(3),
-    color: 'white',
-    textDecoration: 'none',
-    fontSize: '24px',
-    fontWeight: 'bold'
-  },
   credits: {
-    marginRight: theme.spacing(3)
+    marginRight: theme.spacing(2)
+  },
+  avatar: {
+    marginLeft: theme.spacing(2)
+  },
+  button: {
+    marginLeft: theme.spacing(2)
+  },
+  iconButton: {
+    marginRight: theme.spacing(1)
   }
 }));
 
@@ -40,20 +45,36 @@ const NavBar = ({ auth }) => {
         console.log(auth);
         return (
           <Fragment>
-            <Typography className={classes.credits}>
-              Crédits: {auth.credits}
-            </Typography>
+            <Tooltip title="Crédits disponibles">
+              <Typography className={classes.credits}>
+                Crédits: {auth.credits}
+              </Typography>
+            </Tooltip>
             <Payments />
-            <Button color="inherit" href="/api/logout">
-              Se déconnecter
-            </Button>
+            <Tooltip title="Se déconnecter">
+              <Button
+                color="inherit"
+                href="/api/logout"
+                className={classes.button}>
+                <NotificationsIcon className={classes.iconButton} />
+                Se déconnecter
+              </Button>
+            </Tooltip>
+            <Tooltip title="Notifications">
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Tooltip>
+            <Avatar className={classes.avatar}>H</Avatar>
           </Fragment>
         );
     }
   }
 
   return (
-    <div className={classes.root}>
+    <div>
       <Toolbar>{renderContent()}</Toolbar>
     </div>
   );
