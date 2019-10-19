@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as actions from '../../actions';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
@@ -26,7 +29,7 @@ function getStepContent(step) {
   }
 }
 
-const SurveyNew = () => {
+const SurveyNew = ({ formValues = {}, submitSurvey }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -38,12 +41,17 @@ const SurveyNew = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const handleSubmit = () => {
+    submitSurvey(formValues.values);
+    setActiveStep(activeStep + 1);
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
+          <Typography component="h2" variant="h4" align="center">
             Nouveau sondage
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
@@ -62,8 +70,7 @@ const SurveyNew = () => {
                 <Typography variant="subtitle1">
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                   Ratione nemo officia ullam, voluptatem quasi expedita
-                  quibusdam, blanditiis dicta laboriosam tempore similique
-                  perspiciatis cupiditate cum eius.
+                  quibusdam.
                 </Typography>
               </React.Fragment>
             ) : (
@@ -75,13 +82,23 @@ const SurveyNew = () => {
                       Retour
                     </Button>
                   )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}>
-                    {activeStep === steps.length - 1 ? 'Envoyer' : 'Suivant'}
-                  </Button>
+                  {activeStep === steps.length - 1 ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSubmit}
+                      className={classes.button}>
+                      Envoyer
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}>
+                      Suivant
+                    </Button>
+                  )}
                 </div>
               </React.Fragment>
             )}
@@ -92,4 +109,11 @@ const SurveyNew = () => {
   );
 };
 
-export default SurveyNew;
+const mapStateToProps = state => ({
+  formValues: state.form.surveyForm
+});
+
+export default connect(
+  mapStateToProps,
+  actions
+)(SurveyNew);

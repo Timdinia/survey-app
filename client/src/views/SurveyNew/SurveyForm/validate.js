@@ -1,16 +1,16 @@
 export const validate = values => {
   const errors = {};
-  const requiredFields = ['title', 'subject', 'body', 'emails'];
+  const requiredFields = ['title', 'subject', 'body', 'recipients'];
   requiredFields.forEach(field => {
     if (!values[field]) {
-      errors[field] = 'Required';
+      errors[field] = '* Champ requis';
     }
   });
   if (
-    values.email &&
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    values.recipients &&
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.recipients)
   ) {
-    errors.email = 'Invalid email address';
+    errors.recipients = "Merci de saisir un format d'email valide";
   }
   return errors;
 };

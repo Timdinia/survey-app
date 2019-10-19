@@ -1,50 +1,48 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { validate } from './validate';
 import { renderTextField } from './renderTextField';
 
-const SurveyForm = props => {
+const SurveyForm = () => {
   return (
     <main>
-      <form onSubmit={props.handleSubmit(values => console.log(values))}>
-        <Typography variant="h6" gutterBottom>
-          Merci de saisir tout les champs
-        </Typography>
+      <form>
+        <h4>Merci de remplir le formulaire</h4>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Field
               name="title"
-              label="Survey Title"
+              label="Titre"
               type="text"
-              placeholder="Title"
+              placeholder="Titre"
               component={renderTextField}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <Field
               name="subject"
-              label="Subject Line"
+              label="Sujet"
               type="text"
-              placeholder="Subject"
+              placeholder="Sujet"
               component={renderTextField}
             />
           </Grid>
           <Grid item xs={12}>
             <Field
               name="body"
-              label="Email Body"
+              label="Corps du sondage (question)"
               type="text"
-              placeholder="Body"
+              placeholder="Corps"
               component={renderTextField}
             />
           </Grid>
           <Grid item xs={12}>
             <Field
-              name="emails"
-              label="Emails List"
+              name="recipients"
+              label="Destinataires"
               type="email"
-              placeholder="Emails"
+              placeholder="Destinataires"
               component={renderTextField}
             />
           </Grid>
@@ -56,5 +54,6 @@ const SurveyForm = props => {
 
 export default reduxForm({
   form: 'surveyForm',
-  validate
+  validate,
+  destroyOnUnmount: false
 })(SurveyForm);
