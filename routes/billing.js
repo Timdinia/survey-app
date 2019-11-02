@@ -11,7 +11,7 @@ module.exports = app => {
       description: '5$ for 5 crédits',
       source: req.body.id,
     });
-    // add credits to the user and persist the changes
+    
     req.user.credits += 5;
     const user = await req.user.save();
     res.send(user);
