@@ -109,6 +109,10 @@ const SurveyNew = ({ formValues = {}, submitSurvey }) => {
   );
 };
 
+SurveyNew.propTypes = {
+  formValues: PropTypes.object.isRequired
+};
+
 const mapStateToProps = state => ({
   formValues: state.form.surveyForm
 });
