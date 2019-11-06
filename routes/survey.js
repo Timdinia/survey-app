@@ -9,14 +9,14 @@ const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 module.exports = app => {
-  app.get('/api/surveys/thankyou', (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Merci pour votre avis !');
   });
 
   app.post('/api/surveys/webhooks', (req, res) => {
     const p = new Path('/api/surveys/:surveyId/:choice');
 
-    const events = _.chain(req.body)
+    _.chain(req.body)
       .map(({ email, url }) => {
         const match = p.test(new URL(url).pathname); // Extract the path from the url
 
@@ -31,9 +31,20 @@ module.exports = app => {
 
       .compact()
       .uniqBy('email', 'url', 'surveyId')
+      .each(({ surveyId, email, choice }) => {
+        Survey.updateOne(
+          {
+            _id: surveyId,
+            recipients: { $elemMatch: { email: email, responded: false } },
+          },
+          {
+            $inc: { [choice]: 1 },
+            $set: { 'recipients.$.responded': true },
+            lastResponded: new Date(),
+          }
+        ).exec();
+      })
       .value();
-
-    console.log(events);
   });
 
   app.post('/api/surveys', requireAuth, requireCredits, async (req, res) => {
