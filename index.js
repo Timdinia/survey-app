@@ -6,8 +6,8 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const cookieKey = require('./config/keys').cookieKey;
 const db = require('./config/keys').mongoURI;
-require('./models/User');
-require('./models/Survey');
+const User = require('./models/User');
+const Survey = require('./models/Survey');
 require('./services/passport');
 
 // Load express server
