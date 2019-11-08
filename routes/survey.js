@@ -8,6 +8,14 @@ const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 module.exports = app => {
+  app.get('/api/surveys', requireAuth, async (req, res) => {
+    const surveys = await Survey.find({ _user: req.body.id }).select({
+      recipients: false,
+    });
+
+    res.send(surveys);
+  });
+
   app.post('/api/surveys', requireAuth, requireCredits, async (req, res) => {
     const { title, subject, body, recipients } = req.body;
 

@@ -39,7 +39,7 @@ const SurveyNew = ({ formValues = {}, submitSurvey }) => {
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
-  };
+  }; 
 
   const handleSubmit = () => {
     submitSurvey(formValues.values);
