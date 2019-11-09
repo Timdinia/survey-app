@@ -42,7 +42,6 @@ const NavBar = ({ auth }) => {
           </Button>
         );
       default:
-        console.log(auth);
         return (
           <Fragment>
             <Tooltip title="Crédits disponibles">
@@ -54,7 +53,7 @@ const NavBar = ({ auth }) => {
             <Tooltip title="Se déconnecter">
               <Button
                 color="inherit"
-                href="/api/logout"
+                href="/api/logout" // On click => axios.post ou via redux avec action
                 className={classes.button}>
                 <NotificationsIcon className={classes.iconButton} />
                 Se déconnecter

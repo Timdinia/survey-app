@@ -10,7 +10,7 @@ module.exports = app => {
     '/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     function(req, res) {
-      res.redirect('/dashboard');
+      res.redirect('/'); // creer une action redux et faire le redirect côté front
     }
   );
 

@@ -52,5 +52,5 @@ app.get('/', (req, res) => {
   res.send('Test route');
 });
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server started and listening on ${PORT}`));
